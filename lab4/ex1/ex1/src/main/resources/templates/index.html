@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Listing bank accounts: </h1>
+<table>
+    <tr>
+        <th> Account number</th>
+        <th> Account Owner </th>
+        <th> Balance  </th>
+        <th> Delete Person</th>
+    </tr>
+    <tr th:each="bankAccount : ${data}">
+        <td th:text="${bankAccount.getAccountNumber()}"></td>
+        <td th:text="${bankAccount.getAccountOwner()}"></td>
+        <td th:text="${bankAccount.getBalance()}"></td>
+        <td><a th:href="@{/delete/{accountNumber}(accountNumber=${bankAccount.getAccountNumber()})}">Delete bank account</a></td>
+    </tr>
+</table><br><br><br>
+
+<form action="#" th:action="@{/bankAccount/new}" th:object="${bankAccount}" method="post">
+    <label for="accountNumber">Account Number: </label><br>
+    <input type="text" id="accountNumber" th:field="*{accountNumber}"><br>
+
+    <label for="accountOwner">Account Owner : </label><br>
+    <input type="text" id="accountOwner" th:field="*{accountOwner}"><br>
+
+    <label for="balance">Account Balance: </label><br>
+    <input type="text" id="balance" th:field="*{balance}"><br>
+
+    <label for="currency">Account Currency: </label><br>
+    <input type="text" id="currency" th:field="*{currency}"><br>
+
+    <br>
+
+    <input type="submit" value="Add account">
+</form>
+</body>
+</html>
