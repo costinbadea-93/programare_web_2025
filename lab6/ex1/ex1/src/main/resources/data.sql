@@ -1,0 +1,1 @@
+INSERT INTO `web2024`.`bank_account` (`id`, `account_owner`, `account_number`, `balance`, `currency`) VALUES ('1', 'accountNumber1', 'accountOwner1', '1000', 'RON');
