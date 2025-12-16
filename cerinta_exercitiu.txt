@@ -1,0 +1,74 @@
+
+Build a **Spring Boot REST application** using **Spring Data JPA** that manages tasks.
+The system must persist data in a relational database using **one entity only**.
+
+---
+
+## Functional Requirements
+
+### 1. Entity Definition
+
+Create an entity called `Task` with the following fields:
+
+| Field         | Type            | Requirements                   |
+| ------------- | --------------- | ------------------------------ |
+| `id`          | `Long`          | Primary key, auto-generated    |
+| `title`       | `String`        | Mandatory, max 100 characters  |
+| `description` | `String`        | Task description               |
+| `completed`   | `Boolean`       | Default value: `false`         |
+| `priority`    | `Integer`       | Value between 1 and 5          |
+| `createdAt`   | `LocalDateTime` | Automatically set when created |
+
+---
+
+### 2. Persistence Layer
+
+Use **Spring Data JPA**:
+
+* Create a `TaskRepository` extending `JpaRepository<Task, Long>`
+* Implement the following query methods:
+
+  * Find all completed tasks
+  * Find tasks by priority
+  * Find tasks whose title contains a keyword (case-insensitive)
+
+---
+
+### 3. REST API Endpoints
+
+Implement a REST controller with the following endpoints:
+
+| Method   | Endpoint        | Description                                             |
+| -------- | --------------- | ------------------------------------------------------- |
+| `POST`   | `/tasks`        | Create a new task                                       |
+| `GET`    | `/tasks`        | Retrieve all tasks                                      |
+| `GET`    | `/tasks/{id}`   | Retrieve a task by ID                                   |
+| `PUT`    | `/tasks/{id}`   | Update an existing task                                 |
+| `DELETE` | `/tasks/{id}`   | Delete a task                                           |
+---
+
+### 4. Validation Rules
+
+Use **Bean Validation** (`jakarta.validation`):
+
+* `title` must not be blank
+* `priority` must be between 1 and 5
+* Return meaningful validation error responses
+
+---
+
+### 5. Exception Handling
+
+* Return `404 NOT FOUND` when a task does not exist
+* Return `400 BAD REQUEST` for validation errors
+* Use a global exception handler (`@ControllerAdvice`)
+---
+
+### 7. Database Configuration
+
+* Use MySql*
+* Enable JPA auto schema generation
+* Enable SQL logging for debugging
+
+---
+
